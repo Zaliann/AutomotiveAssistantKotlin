@@ -5,14 +5,15 @@ import com.example.automotiveassistantkotlin.domain.repositories.ExpenseReposito
 import java.util.Date
 import javax.inject.Inject
 
-class GetExpensesByCarIdUseCase @Inject constructor(
+class GetExpensesByFilterUseCase @Inject constructor(
     private val expenseRepository: ExpenseRepository
 ) {
     suspend operator fun invoke(
         carId: Long,
-        startDate: Date? = null,
-        endDate: Date? = null
+        fromDate: Date? = null,
+        toDate: Date? = null,
+        category: String? = null
     ): List<ExpenseModel> {
-        return expenseRepository.getExpensesByCarId(carId, startDate, endDate)
+        return expenseRepository.getExpensesByFilter(carId, fromDate, toDate, category)
     }
 }
