@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import androidx.room.Index
 import java.util.Date
 
 // IndividualCarPart Entity
@@ -12,6 +13,10 @@ import java.util.Date
     foreignKeys = [
         ForeignKey(entity = CarEntity::class, parentColumns = ["id"], childColumns = ["car_id"], onDelete = ForeignKey.CASCADE),
         ForeignKey(entity = CarPartEntity::class, parentColumns = ["id"], childColumns = ["part_id"], onDelete = ForeignKey.CASCADE)
+    ],
+    indices = [
+        Index(value = ["car_id"]),
+        Index(value = ["part_id"])
     ]
 )
 data class IndividualCarPartEntity(

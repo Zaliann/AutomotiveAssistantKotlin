@@ -30,9 +30,23 @@ fun ExpensesScreen(
         viewModel.loadExpenses(carId)
     }
 
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(expenses) { expense ->
-            ExpenseItem(expense)
+    if (expenses.isEmpty()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Нет расходов для этой машины",
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
+    } else {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            items(expenses) { expense ->
+                ExpenseItem(expense)
+            }
         }
     }
 }

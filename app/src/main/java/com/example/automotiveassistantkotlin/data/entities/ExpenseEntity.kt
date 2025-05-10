@@ -1,10 +1,7 @@
 package com.example.automotiveassistantkotlin.data.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
-import java.util.Date
+import androidx.room.*
+import java.util.*
 
 // Expense Entity
 @Entity(
@@ -12,7 +9,9 @@ import java.util.Date
     foreignKeys = [
         ForeignKey(entity = CarEntity::class, parentColumns = ["id"], childColumns = ["car_id"], onDelete = ForeignKey.CASCADE),
         ForeignKey(entity = IndividualCarPartEntity::class, parentColumns = ["id"], childColumns = ["individual_car_parts_id"], onDelete = ForeignKey.SET_NULL)
-    ]
+    ],
+    indices = [Index(value = ["car_id"]),
+        Index(value = ["individual_car_parts_id"])]
 )
 data class ExpenseEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,

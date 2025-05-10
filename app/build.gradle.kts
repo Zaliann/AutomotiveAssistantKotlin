@@ -1,15 +1,7 @@
 plugins {
-    /*
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.kapt)
-
-
-     */
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.kapt") // ✅ обычная строка
+    id("org.jetbrains.kotlin.android") //version "1.9.22"
+    id("org.jetbrains.kotlin.kapt") //version "1.9.22" // ✅ обычная строка
     id("com.google.dagger.hilt.android")
 }
 
@@ -37,15 +29,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
     buildFeatures {
         compose = true
@@ -53,31 +45,50 @@ android {
 }
 
 dependencies {
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    implementation(libs.hilt.android)
-    //kapt(libs.plugins.hilt)
-    implementation("com.google.dagger:hilt-android:2.48")
-    implementation(libs.androidx.runtime.android)
-    implementation(libs.androidx.foundation.android)
-    kapt("com.google.dagger:hilt-android-compiler:2.48")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    // Compose BOM
+    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
 
-    implementation("androidx.navigation:navigation-compose:2.7.7")
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-    implementation("androidx.compose.material3:material3:1.2.1")
-    implementation("androidx.compose.ui:ui:1.5.4")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
+    // Compose UI
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(libs.material)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    //implementation(libs.androidx.room.common.jvm)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    // Material 3
+    implementation("androidx.compose.material3:material3")
+
+    // Foundation
+    implementation("androidx.compose.foundation:foundation")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx")
+
+    // Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-compiler:2.48")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+
+    // Kotlin datetime
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+
+    // Accompanist
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.34.0")
+
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
 }

@@ -4,3 +4,10 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
 
 }
+buildscript {
+
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.48")
+    }
+}
